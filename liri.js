@@ -36,7 +36,7 @@ if (userInput === "my-tweets") {
 	  }
 	});
 
-} else if (userInput === "spotify-this-song") {
+} else if (userInput === "spotify-my-song") {
 
 	var userSong = process.argv;
 
@@ -44,19 +44,38 @@ if (userInput === "my-tweets") {
 
 	processSong = userSong.slice(3).join(' ');
 
-	spotify.search({ type: 'track', query: processSong }, function(err, data) {
-	    if ( err ) {
-	        console.log('Error occurred: ' + err);
-	        return;
-	    } else {
-	    	console.log("-------------------------");
-	    	console.log("Great song choice! Want more info?:\n");
-	    	console.log("Artist: " + data.tracks.items[0].artists[0].name);
-	    	console.log("Song Name: " + data.tracks.items[0].name);
-	    	console.log("Album: " + data.tracks.items[0].album.name);
-	    	console.log("Listen to you song here: " + data.tracks.items[0].preview_url);
-	    }
-	});
+	if (processSong === "") {
 
+		spotify.lookup({ type: 'track', id: "0hrBpAOgrt8RXigk83LLNE" }, function(err, data) {
+		    if ( err ) {
+		        console.log('Error occurred: ' + err);
+		        return;
+		    } else {
+		    	// console.log(data)
+		    	console.log("-------------------------");
+		    	console.log("You didn't choose a song... Ace of Base it is!:\n");
+		    	console.log("Artist: " + data.artists[0].name);
+		    	console.log("Song Name: " + data.name);
+		    	console.log("Album: " + data.album.name);
+		    	console.log("Listen to your song here: " + data.preview_url);
+		    }
+		});
+
+	} else {
+
+		spotify.search({ type: 'track', query: processSong }, function(err, data) {
+		    if ( err ) {
+		        console.log('Error occurred: ' + err);
+		        return;
+		    } else {
+		    	console.log("-------------------------");
+		    	console.log("Great song choice! Want more info?:\n");
+		    	console.log("Artist: " + data.tracks.items[0].artists[0].name);
+		    	console.log("Song Name: " + data.tracks.items[0].name);
+		    	console.log("Album: " + data.tracks.items[0].album.name);
+		    	console.log("Listen to your song here: " + data.tracks.items[0].preview_url);
+		    }
+		});
+	}
 }
 
