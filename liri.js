@@ -1,5 +1,10 @@
+// Incorporate the fs package to read and write files
+var fs = require ('fs');
+
 // create a variable that allows LIRI to take in a command from terminal
 var userInput = process.argv[2];
+// Log userInput to log.txt
+fs.appendFile("log.txt", "-----------------------------------\nUser Command Logged: " +  userInput + "\n");
 
 //TWITTER COMPONDENTS
 	// Incorporate the "twitter" npm package
@@ -22,10 +27,6 @@ var userInput = process.argv[2];
 //REQUEST(OMDB) COMPONENTS
 	// Incorporate the "request" npm package
 	var request = require('request');
-
-//DO WHAT IT SAYS COMPONENTS
-	// Incorporate the fs package to read and write files
-	var fs = require ('fs');
 
 // BEGIN USER CHOICES
 
@@ -56,13 +57,15 @@ if (userInput === "do-what-it-says") {
 			client.get('statuses/user_timeline.json', params, function(error, tweets, response) {
 			  // If no error occurs, log user (who's screen_name is specified in params) last 7 tweets
 			  if (!error) {
-			  	// Intro message to tweet list
+			  	// Intro message to tweet list / log.txt
 			  	console.log("\nJP's Last Tweets!\nDisclaimer: I just created my Twitter so these are all the Tweets I have")
-			  	console.log("-------------------------");	  	
+			  	console.log("-------------------------");	 
+			  	fs.appendFile("log.txt", "Command Output Logged:\n"); 	
 			  	// Create a loop to loop through last 7 tweets
 			  	for (var i = 0; i < 6; i++) {
-			        // Log tweet texts
+			        // Log tweet texts to console & log.txt
 			    	console.log((i + 1) + ". " + tweets[i].text);
+			    	fs.appendFile("log.txt", (i + 1) + ". " + tweets[i].text + "\n");
 			    	// Log tweet creation dates
 			    	console.log("Tweeted at: " + tweets[i].created_at + "\n\n");			
 				// If error occurs, log error message
@@ -86,17 +89,22 @@ if (userInput === "do-what-it-says") {
 				    // If no errors occur, log data for the song...
 				    } else {
 				    	console.log("-------------------------");
-				    	// Log intro message
+				    	// Log intro message to console & log.txt
 				    	console.log("You didn't choose a song... Ace of Base it is!:\n");
-				    	// Log artist info
+				    	fs.appendFile("log.txt", "Command Output Logged:\n"); 
+				    	// Log artist info to console & log.txt
 				    	console.log("Artist: " + data.artists[0].name);
-				    	// Log track name
+				    	fs.appendFile("log.txt", "Artist: " + data.artists[0].name + "\n");
+				    	// Log track name to console & log.txt
 				    	console.log("Song Name: " + data.name);
-				    	// Log album info of track
+				    	fs.appendFile("log.txt", "Song Name: " + data.name + "\n");
+				    	// Log album info of track to console & log.txt
 				    	console.log("Album: " + data.album.name);
-				    	// Provide a link to song clip
+				    	fs.appendFile("log.txt", "Album: " + data.album.name + "\n");
+				    	// Provide a link to song clip to console & log.txt
 				    	console.log("Listen to your song here: " + data.preview_url);
-				    }
+				    	fs.appendFile("log.txt", "Listen to your song here: " + data.preview_url + "\n");
+					}
 				});
 			
 			// If the user types a song in...
@@ -110,16 +118,21 @@ if (userInput === "do-what-it-says") {
 				    // If no errors occur, log data for the song...
 				    } else {
 				    	console.log("-------------------------");
-				    	// Log intro message
+				    	// Log intro message to console & log.txt
 				    	console.log("Great song choice! Here are more details:\n");
-				    	// Log artist info
+				    	fs.appendFile("log.txt", "Command Output Logged:\n");
+				    	// Log artist info to console & log.txt
 				    	console.log("Artist: " + data.tracks.items[0].artists[0].name);
-				    	// Log track name
+				    	fs.appendFile("log.txt", "Artist: " + data.tracks.items[0].artists[0].name + "\n");
+				    	// Log track name to console & log.txt
 				    	console.log("Song Name: " + data.tracks.items[0].name);
-				    	// Log album info of track
+				    	fs.appendFile("log.txt", "Song Name: " + data.tracks.items[0].name + "\n");
+				    	// Log album info of track to console & log.txt
 				    	console.log("Album: " + data.tracks.items[0].album.name);
-				    	// Provide a link to song clip
+				    	fs.appendFile("log.txt", "Album: " + data.tracks.items[0].album.name + "\n");
+				    	// Provide a link to song clip to console & log.txt
 				    	console.log("Listen to your song here: " + data.tracks.items[0].preview_url);
+				    	fs.appendFile("log.txt", "Listen to your song here: " + data.tracks.items[0].preview_url + "\n");
 				    }
 				});
 			}
@@ -140,30 +153,38 @@ if (userInput === "do-what-it-says") {
 				  		// Print the HTML for the page. 
 					  	var omdbObject = JSON.parse(body); 
 					  	// console.log(omdbObject)
-
 					  	console.log("-------------------------");
-
-					  	// Log Intro messages
+					  	// Log Intro messages to console & log.txt
 					  	console.log("You didn't choose a movie... Mr. Nobody it is!")
 					  	console.log("If you haven't watched it, you should. It's on Netflix! Here are more deets:\n")
-					  	// Log the title of the movie.
+					  	fs.appendFile("log.txt", "Command Output Logged:\n"); 
+					  	// Log the title of the movie. to console & log.txt
 						console.log("Movie Title: " + omdbObject.Title);
-						// Log the Year the movie came out.
+						fs.appendFile("log.txt", "Movie Title: " + omdbObject.Title + "\n");
+						// Log the Year the movie came out. to console & log.txt
 						console.log("Year Released: " + omdbObject.Year);
-						// Log the IMDB Rating of the movie.
+						fs.appendFile("log.txt", "Year Released: " + omdbObject.Year + "\n");
+						// Log the IMDB Rating of the movie. to console & log.txt
 						console.log("IMDB Rating: " + omdbObject.imdbRating);
-						// Log the Country where the movie was produced.
+						fs.appendFile("log.txt", "IMDB Rating: " + omdbObject.imdbRating + "\n");
+						// Log the Country where the movie was produced. to console & log.txt
 						console.log("Country Produced: " + omdbObject.Country);
-						// Log the Language of the movie.
+						fs.appendFile("log.txt", "Country Produced: " + omdbObject.Country + "\n");
+						// Log the Language of the movie. to console & log.txt
 						console.log("Language: " + omdbObject.Language);
-						// Log the Plot of the movie.
+						fs.appendFile("log.txt", "Language: " + omdbObject.Language + "\n");
+						// Log the Plot of the movie. to console & log.txt
 						console.log("Plot: " + omdbObject.Plot);
-						// Log the Actors in the movie.
+						fs.appendFile("log.txt", "Plot: " + omdbObject.Plot + "\n");
+						// Log the Actors in the movie. to console & log.txt
 						console.log("Cast: " + omdbObject.Actors);
-						// Log the Rotten Tomatoes Rating.
+						fs.appendFile("log.txt", "Cast: " + omdbObject.Actors + "\n");
+						// Log the Rotten Tomatoes Rating. to console & log.txt
 						console.log("Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value);
-						// Log the movie URL.
+						fs.appendFile("log.txt", "Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value + "\n");
+						// Log the movie URL. to console & log.txt
 						console.log("Website: " + omdbObject.Website);
+						fs.appendFile("log.txt", "Website: " + omdbObject.Website + "\n");
 
 						console.log("-------------------------");
 					}
@@ -182,30 +203,42 @@ if (userInput === "do-what-it-says") {
 					  	var omdbObject = JSON.parse(body); 
 					  	// console.log(omdbObject)
 					  	console.log("-------------------------");
+					  	// Log Intro messages to console & log.txt
 					  	console.log("Great Movie Choice! Here are more details.\n")
+					  	fs.appendFile("log.txt", "Command Output Logged:\n"); 
 					  	//LOG DETAILS:
-							// Title of the movie.
+							// Title of the movie console & log.txt
 							console.log("Movie Title: " + omdbObject.Title);
-							// Year the movie came out.
+							fs.appendFile("log.txt", "Movie Title: " + omdbObject.Title + "\n");
+							// Year the movie came out console & log.txt
 							console.log("Year Released: " + omdbObject.Year);
-							// IMDB Rating of the movie.
+							fs.appendFile("log.txt", "Year Released: " + omdbObject.Year + "\n");
+							// IMDB Rating of the movie console & log.txt
 							console.log("IMDB Rating: " + omdbObject.imdbRating);
-							// Country where the movie was produced.
+							fs.appendFile("log.txt", "IMDB Rating: " + omdbObject.imdbRating + "\n");
+							// Country where the movie was produced console & log.txt
 							console.log("Country Produced: " + omdbObject.Country);
-							// Language of the movie.
+							fs.appendFile("log.txt", "Country Produced: " + omdbObject.Country + "\n");
+							// Language of the movie console & log.txt
 							console.log("Language: " + omdbObject.Language);
-							// Plot of the movie.
+							fs.appendFile("log.txt", "Language: " + omdbObject.Language + "\n");
+							// Plot of the movie console & log.txt
 							console.log("Plot: " + omdbObject.Plot);
-							// Actors in the movie.
+							fs.appendFile("log.txt", "Plot: " + omdbObject.Plot + "\n");
+							// Actors in the movie. console & log.txt
 							console.log("Cast: " + omdbObject.Actors);
-							// Rotten Tomatoes Rating.
+							fs.appendFile("log.txt", "Cast: " + omdbObject.Actors + "\n");
+							// Rotten Tomatoes Rating. console & log.txt
 							if (omdbObject.Ratings[1] === undefined) {
 								console.log("Rotten Tomatoes Rating: None");
 							} else {
 								console.log("Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value);
+								fs.appendFile("log.txt", "Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value + "\n");
 							}
-							// Rotten Tomatoes URL.
+							
+							// Website URL. console & log.txt
 							console.log("Website: " + omdbObject.Website);
+							fs.appendFile("log.txt", "Website: " + omdbObject.Website + "\n"); 	
 
 							console.log("-------------------------");
 					}
@@ -222,13 +255,15 @@ if (userInput === "do-what-it-says") {
 	client.get('statuses/user_timeline.json', params, function(error, tweets, response) {
 	  // If no error occurs, log user (who's screen_name is specified in params) last 7 tweets
 	  if (!error) {
-	  	// Intro message to tweet list
+	  	// Intro message to tweet list & log.txt
 	  	console.log("\nJP's Last Tweets!\nDisclaimer: I just created my Twitter so these are all the Tweets I have")
-	  	console.log("-------------------------");	  	
+	  	console.log("-------------------------");	
+	  	fs.appendFile("log.txt", "Command Output Logged:\n");   	
 	  	// Create a loop to loop through last 7 tweets
 	  	for (var i = 0; i < 6; i++) {
-	        // Log tweet texts
+	        // Log tweet texts to console & log.txt
 	    	console.log((i + 1) + ". " + tweets[i].text);
+	    	fs.appendFile("log.txt", (i + 1) + ". " + tweets[i].text + "\n");
 	    	// Log tweet creation dates
 	    	console.log("Tweeted at: " + tweets[i].created_at + "\n\n");			
 		// If error occurs, log error message
@@ -258,16 +293,21 @@ if (userInput === "do-what-it-says") {
 		    // If no errors occur, log data for the song...
 		    } else {
 		    	console.log("-------------------------");
-		    	// Log intro message
+		    	// Log intro message to console & log.txt
 		    	console.log("You didn't choose a song... Ace of Base it is!:\n");
-		    	// Log artist info
+		    	fs.appendFile("log.txt", "Command Output Logged:\n"); 
+		    	// Log artist info to console & log.txt
 		    	console.log("Artist: " + data.artists[0].name);
-		    	// Log track name
+		    	fs.appendFile("log.txt", "Artist: " + data.artists[0].name + "\n");
+		    	// Log track name to console & log.txt
 		    	console.log("Song Name: " + data.name);
-		    	// Log album info of track
+		    	fs.appendFile("log.txt", "Song Name: " + data.name + "\n");
+		    	// Log album info of track to console & log.txt
 		    	console.log("Album: " + data.album.name);
-		    	// Provide a link to song clip
+		    	fs.appendFile("log.txt", "Album: " + data.album.name + "\n");
+		    	// Provide a link to song clip to console & log.txt
 		    	console.log("Listen to your song here: " + data.preview_url);
+		    	fs.appendFile("log.txt", "Listen to your song here: " + data.preview_url + "\n");
 		    }
 		});
 	
@@ -282,16 +322,21 @@ if (userInput === "do-what-it-says") {
 		    // If no errors occur, log data for the song...
 		    } else {
 		    	console.log("-------------------------");
-		    	// Log intro message
+		    	// Log intro message to console & log.txt
 		    	console.log("Great song choice! Here are more details:\n");
-		    	// Log artist info
+		    	fs.appendFile("log.txt", "Command Output Logged:\n");
+		    	// Log artist info to console & log.txt
 		    	console.log("Artist: " + data.tracks.items[0].artists[0].name);
-		    	// Log track name
+		    	fs.appendFile("log.txt", "Artist: " + data.tracks.items[0].artists[0].name + "\n");
+		    	// Log track name to console & log.txt
 		    	console.log("Song Name: " + data.tracks.items[0].name);
-		    	// Log album info of track
+		    	fs.appendFile("log.txt", "Song Name: " + data.tracks.items[0].name + "\n");
+		    	// Log album info of track to console & log.txt
 		    	console.log("Album: " + data.tracks.items[0].album.name);
-		    	// Provide a link to song clip
+		    	fs.appendFile("log.txt", "Album: " + data.tracks.items[0].album.name + "\n");
+		    	// Provide a link to song clip to console & log.txt
 		    	console.log("Listen to your song here: " + data.tracks.items[0].preview_url);
+		    	fs.appendFile("log.txt", "Listen to your song here: " + data.tracks.items[0].preview_url + "\n");
 		    }
 		});
 	}
@@ -307,6 +352,7 @@ if (userInput === "do-what-it-says") {
 
 	// If the user doesn't type a movie in...	
 	if (processMovie === "") {
+		
 		// Request info for Mr. Nobody from OMDB API
 		request('http://www.omdbapi.com?t=mr+nobody', function (error, response, body) {
 		 	// If error occurs, log error message
@@ -320,28 +366,37 @@ if (userInput === "do-what-it-says") {
 			  	// console.log(omdbObject)
 
 			  	console.log("-------------------------");
-
-			  	// Log Intro messages
+			  	// Log Intro messages to console & log.txt
 			  	console.log("You didn't choose a movie... Mr. Nobody it is!")
 			  	console.log("If you haven't watched it, you should. It's on Netflix! Here are more deets:\n")
-			  	// Log the title of the movie.
+			  	fs.appendFile("log.txt", "Command Output Logged:\n"); 
+			  	// Log the title of the movie. to console & log.txt
 				console.log("Movie Title: " + omdbObject.Title);
-				// Log the Year the movie came out.
+				fs.appendFile("log.txt", "Movie Title: " + omdbObject.Title + "\n");
+				// Log the Year the movie came out. to console & log.txt
 				console.log("Year Released: " + omdbObject.Year);
-				// Log the IMDB Rating of the movie.
+				fs.appendFile("log.txt", "Year Released: " + omdbObject.Year + "\n");
+				// Log the IMDB Rating of the movie. to console & log.txt
 				console.log("IMDB Rating: " + omdbObject.imdbRating);
-				// Log the Country where the movie was produced.
+				fs.appendFile("log.txt", "IMDB Rating: " + omdbObject.imdbRating + "\n");
+				// Log the Country where the movie was produced. to console & log.txt
 				console.log("Country Produced: " + omdbObject.Country);
-				// Log the Language of the movie.
+				fs.appendFile("log.txt", "Country Produced: " + omdbObject.Country + "\n");
+				// Log the Language of the movie. to console & log.txt
 				console.log("Language: " + omdbObject.Language);
-				// Log the Plot of the movie.
+				fs.appendFile("log.txt", "Language: " + omdbObject.Language + "\n");
+				// Log the Plot of the movie. to console & log.txt
 				console.log("Plot: " + omdbObject.Plot);
-				// Log the Actors in the movie.
+				fs.appendFile("log.txt", "Plot: " + omdbObject.Plot + "\n");
+				// Log the Actors in the movie. to console & log.txt
 				console.log("Cast: " + omdbObject.Actors);
-				// Log the Rotten Tomatoes Rating.
+				fs.appendFile("log.txt", "Cast: " + omdbObject.Actors + "\n");
+				// Log the Rotten Tomatoes Rating. to console & log.txt
 				console.log("Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value);
-				// Log the movie URL.
+				fs.appendFile("log.txt", "Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value + "\n");
+				// Log the movie URL. to console & log.txt
 				console.log("Website: " + omdbObject.Website);
+				fs.appendFile("log.txt", "Website: " + omdbObject.Website + "\n");
 
 				console.log("-------------------------");
 			}
@@ -360,36 +415,48 @@ if (userInput === "do-what-it-says") {
 			  	var omdbObject = JSON.parse(body); 
 			  	// console.log(omdbObject)
 			  	console.log("-------------------------");
+			  	// Log Intro messages to console & log.txt
 			  	console.log("Great Movie Choice! Here are more details.\n")
+			  	fs.appendFile("log.txt", "Command Output Logged:\n"); 
 			  	//LOG DETAILS:
-					// Title of the movie.
+					// Title of the movie console & log.txt
 					console.log("Movie Title: " + omdbObject.Title);
-					// Year the movie came out.
+					fs.appendFile("log.txt", "Movie Title: " + omdbObject.Title + "\n");
+					// Year the movie came out console & log.txt
 					console.log("Year Released: " + omdbObject.Year);
-					// IMDB Rating of the movie.
+					fs.appendFile("log.txt", "Year Released: " + omdbObject.Year + "\n");
+					// IMDB Rating of the movie console & log.txt
 					console.log("IMDB Rating: " + omdbObject.imdbRating);
-					// Country where the movie was produced.
+					fs.appendFile("log.txt", "IMDB Rating: " + omdbObject.imdbRating + "\n");
+					// Country where the movie was produced console & log.txt
 					console.log("Country Produced: " + omdbObject.Country);
-					// Language of the movie.
+					fs.appendFile("log.txt", "Country Produced: " + omdbObject.Country + "\n");
+					// Language of the movie console & log.txt
 					console.log("Language: " + omdbObject.Language);
-					// Plot of the movie.
+					fs.appendFile("log.txt", "Language: " + omdbObject.Language + "\n");
+					// Plot of the movie console & log.txt
 					console.log("Plot: " + omdbObject.Plot);
-					// Actors in the movie.
+					fs.appendFile("log.txt", "Plot: " + omdbObject.Plot + "\n");
+					// Actors in the movie. console & log.txt
 					console.log("Cast: " + omdbObject.Actors);
-					// Rotten Tomatoes Rating.
+					fs.appendFile("log.txt", "Cast: " + omdbObject.Actors + "\n");
+					// Rotten Tomatoes Rating. console & log.txt
 					if (omdbObject.Ratings[1] === undefined) {
 						console.log("Rotten Tomatoes Rating: None");
 					} else {
 						console.log("Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value);
+						fs.appendFile("log.txt", "Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value + "\n");
 					}
-					// Rotten Tomatoes URL.
+					// Website URL. console & log.txt
 					console.log("Website: " + omdbObject.Website);
+					fs.appendFile("log.txt", "Website: " + omdbObject.Website + "\n"); 
 
 					console.log("-------------------------");
 			}
 		});
 	}
 }
+
 
 
 

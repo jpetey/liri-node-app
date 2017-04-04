@@ -1,0 +1,65 @@
+-----------------------------------
+User Command Logged: do-what-it-says
+Command Output Logged:
+Movie Title: Zadarski memento
+Year Released: 1984
+IMDB Rating: 7.8
+Country Produced: Yugoslavia
+Plot: The painful challenges experienced in the life of a farmer from Zadar, Croatia, in the years from World War I to World War II.
+Cast: Lazar Ristovski, Zdravka Krstulovic, Mustafa Nadarevic, Milan Strljic
+Website: N/A
+Language: Croatian, Italian
+-----------------------------------
+User Command Logged: do-what-it-says
+Command Output Logged:
+Song Name: The Logical Song - 2010 Remastered
+Artist: Supertramp
+Album: Breakfast In America (Deluxe Edition)
+Listen to your song here: https://p.scdn.co/mp3-preview/1f0a6e3df9b8d4f75e148d9ee3cdefd8e9e134e5?cid=null
+-----------------------------------
+User Command Logged: my-tweets
+Command Output Logged:
+1. P.S. - Why have I so ignored twitter all these years?!? My random stream of consciousness finally feels at home.
+4. Soup is so underrated. #soupnazi
+2. And I just realized we were supposed to post about our latest projects.
+3. 3.5 months until Over the Line time! Soliciting team names. Current high bidder: Sunset Queefs.
+5. See you in June, Desert View Tower! And you should too: https://t.co/v886I6bxqn
+6. My dog makes me do things I don't want to do. And now I am on Twitter against my will.
+-----------------------------------
+User Command Logged: spotify-this-song
+Command Output Logged:
+Album: Aha Shake Heartbreak
+Artist: Kings of Leon
+Song Name: Rememo
+Listen to your song here: https://p.scdn.co/mp3-preview/1eac3d859a6779d308d7c6fb4b98e26444bf343d?cid=null
+-----------------------------------
+User Command Logged: spotify-this-song
+Command Output Logged:
+Album: The Sign (US Album) [Remastered]
+Artist: Ace of Base
+Song Name: The Sign
+Listen to your song here: https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=null
+-----------------------------------
+User Command Logged: movie-this
+Command Output Logged:
+Movie Title: Office Space
+Country Produced: USA
+Year Released: 1999
+Language: English
+IMDB Rating: 7.8
+Plot: Three company workers who hate their jobs decide to rebel against their greedy boss.
+Cast: Ron Livingston, Jennifer Aniston, David Herman, Ajay Naidu
+Rotten Tomatoes Rating: 79%
+Website: http://www.officeguy.com
+-----------------------------------
+User Command Logged: movie-this
+Command Output Logged:
+Movie Title: Mr. Nobody
+Country Produced: Belgium, Germany, Canada, France
+Year Released: 2009
+Language: English, Mohawk
+IMDB Rating: 7.9
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+Cast: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+Rotten Tomatoes Rating: 64%
+Website: http://www.magpictures.com/mrnobody/
