@@ -12,7 +12,7 @@ var userInput = process.argv[2];
 
 	// Create a way to show your last 20 tweets and when they were created in your terminal/bash window.
 	var params = {
-		screen_name: 'themontymonster',
+		screen_name: 'themontymonster'
 		};
 
 //SPOTIFY COMPONENTS
@@ -24,8 +24,8 @@ var userInput = process.argv[2];
 	var request = require('request');
 
 //DO WHAT IT SAYS COMPONENTS
-	// Incorporate the fs package
-	var fs = require ('fs')
+	// Incorporate the fs package to read and write files
+	var fs = require ('fs');
 
 // BEGIN USER CHOICES
 
@@ -46,11 +46,11 @@ if (userInput === "my-tweets") {
 	    	// Log tweet creation dates
 	    	console.log("Tweeted at: " + tweets[i].created_at + "\n\n");			
 		// If error occurs, log error message
-		} else if (error) {
-			console.log("An error occured: " + error)
-		}
-	  }
-	});
+		} 
+	} else if (error) {
+		console.log("An error occured: " + error)
+	}
+});
 
 // What happens when the user types 'spotify-my-song'
 } else if (userInput === "spotify-my-song") {
@@ -202,6 +202,48 @@ if (userInput === "my-tweets") {
 
 // What happens when the user types "do-what-it-says"
 } else if (userInput === "do-what-it-says") {
+
+	// Read from the "random.txt" file
+	fs.readFile("random.txt", "utf8", function(error, data) {
+		// Log contents of random.txt
+  		console.log(data);
+  		// Split data by commas (create an array) to make it more readable
+  		var dataArray = data.split(",");
+		// Log the new array
+	  	// console.log(dataArray);
+
+	  	// Set a variable equal to index[0] of array in order to pull "command" (spotify-this-song)
+	  	var userInput = dataArray[0];
+	  	// console.log(userCommandFromTxt); 
+
+	  	// Set a variable equal to index[1] of array in order to pull song 
+	  	var songFromTxt = dataArray[1];
+	  	// console.log(songFromTxt);
+
+		spotify.search({ type: 'track', query: songFromTxt }, function(err, data) {
+		    // If error occurs, log error message
+		    if ( err ) {
+		        console.log('Error occurred: ' + err);
+		        return;
+		    // If no errors occur, log data for the song...
+		    } else {
+		    	console.log("-------------------------");
+		    	// Log intro message
+		    	console.log("Great song choice! Here are more details?:\n");
+		    	// Log artist info
+		    	console.log("Artist: " + data.tracks.items[0].artists[0].name);
+		    	// Log track name
+		    	console.log("Song Name: " + data.tracks.items[0].name);
+		    	// Log album info of track
+		    	console.log("Album: " + data.tracks.items[0].album.name);
+		    	// Provide a link to song clip
+		    	console.log("Listen to your song here: " + data.tracks.items[0].preview_url);
+		    }
+		});
+
+	});
+
+
 
 }
 
