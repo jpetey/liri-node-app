@@ -19,6 +19,10 @@ var userInput = process.argv[2];
 	// Incorporate the "spotify" npm package
 	var spotify = require('spotify');
 
+//REQUEST(OMDB) COMPONENTS
+	// Incorporate the "request" npm package
+	var request = require('request');
+
 
 if (userInput === "my-tweets") {
 
@@ -69,7 +73,7 @@ if (userInput === "my-tweets") {
 		        return;
 		    } else {
 		    	console.log("-------------------------");
-		    	console.log("Great song choice! Want more info?:\n");
+		    	console.log("Great song choice! Here are more details?:\n");
 		    	console.log("Artist: " + data.tracks.items[0].artists[0].name);
 		    	console.log("Song Name: " + data.tracks.items[0].name);
 		    	console.log("Album: " + data.tracks.items[0].album.name);
@@ -77,5 +81,48 @@ if (userInput === "my-tweets") {
 		    }
 		});
 	}
+} else if (userInput === "movie-this") {
+
+	var userMovie = process.argv;
+
+	var processMovie = "";
+
+	processMovie = userMovie.slice(3).join(' ');
+
+	request('http://www.omdbapi.com?t=' + processMovie, function (error, response, body) {
+	  if (error) {
+		console.log('Error occurred: ' + error);
+		return;
+	  
+	  } else if (body) {
+	  	// Print the HTML for the page. 
+	  	var omdbObject = JSON.parse(body); 
+	  	// console.log(omdbObject)
+	  	console.log("-------------------------");
+	  	console.log("Great Movie Choice! Here are more details.\n")
+	  	//LOG DETAILS:
+			// Title of the movie.
+			console.log("Movie Title: " + omdbObject.Title);
+			// Year the movie came out.
+			console.log("Year Released: " + omdbObject.Year);
+			// IMDB Rating of the movie.
+			console.log("IMDB Rating: " + omdbObject.imdbRating);
+			// Country where the movie was produced.
+			console.log("Country Produced: " + omdbObject.Country);
+			// Language of the movie.
+			console.log("Lamguage: " + omdbObject.Language);
+			// Plot of the movie.
+			console.log("Plot: " + omdbObject.Plot);
+			// Actors in the movie.
+			console.log("Cast: " + omdbObject.Actors);
+			// Rotten Tomatoes Rating.
+			console.log("Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value);
+			// Rotten Tomatoes URL.
+			console.log("Website: " + omdbObject.Website);
+
+			console.log("-------------------------");
+	  }
+	});
+
 }
 
