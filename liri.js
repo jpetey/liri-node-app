@@ -89,40 +89,80 @@ if (userInput === "my-tweets") {
 
 	processMovie = userMovie.slice(3).join(' ');
 
-	request('http://www.omdbapi.com?t=' + processMovie, function (error, response, body) {
-	  if (error) {
-		console.log('Error occurred: ' + error);
-		return;
-	  
-	  } else if (body) {
-	  	// Print the HTML for the page. 
-	  	var omdbObject = JSON.parse(body); 
-	  	// console.log(omdbObject)
-	  	console.log("-------------------------");
-	  	console.log("Great Movie Choice! Here are more details.\n")
-	  	//LOG DETAILS:
-			// Title of the movie.
-			console.log("Movie Title: " + omdbObject.Title);
-			// Year the movie came out.
-			console.log("Year Released: " + omdbObject.Year);
-			// IMDB Rating of the movie.
-			console.log("IMDB Rating: " + omdbObject.imdbRating);
-			// Country where the movie was produced.
-			console.log("Country Produced: " + omdbObject.Country);
-			// Language of the movie.
-			console.log("Lamguage: " + omdbObject.Language);
-			// Plot of the movie.
-			console.log("Plot: " + omdbObject.Plot);
-			// Actors in the movie.
-			console.log("Cast: " + omdbObject.Actors);
-			// Rotten Tomatoes Rating.
-			console.log("Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value);
-			// Rotten Tomatoes URL.
-			console.log("Website: " + omdbObject.Website);
+	if (processMovie === "") {
 
-			console.log("-------------------------");
-	  }
-	});
+		request('http://www.omdbapi.com?t=mr+nobody', function (error, response, body) {
+		 	if (error) {
+				console.log('Error occurred: ' + error);
+				return;
+		  
+		  	} else if (body) {
+		  		// Print the HTML for the page. 
+			  	var omdbObject = JSON.parse(body); 
+			  	// console.log(omdbObject)
+			  	console.log("-------------------------");
+			  	console.log("You didn't choose a movie... Mr. Nobody it is!\n")
+			  	//LOG DETAILS:
+					// Title of the movie.
+					console.log("Movie Title: " + omdbObject.Title);
+					// Year the movie came out.
+					console.log("Year Released: " + omdbObject.Year);
+					// IMDB Rating of the movie.
+					console.log("IMDB Rating: " + omdbObject.imdbRating);
+					// Country where the movie was produced.
+					console.log("Country Produced: " + omdbObject.Country);
+					// Language of the movie.
+					console.log("Language: " + omdbObject.Language);
+					// Plot of the movie.
+					console.log("Plot: " + omdbObject.Plot);
+					// Actors in the movie.
+					console.log("Cast: " + omdbObject.Actors);
+					// Rotten Tomatoes Rating.
+					console.log("Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value);
+					// Rotten Tomatoes URL.
+					console.log("Website: " + omdbObject.Website);
+
+					console.log("-------------------------");
+			}
+		});
+
+	} else {
+
+		request('http://www.omdbapi.com?t=' + processMovie, function (error, response, body) {
+		 	if (error) {
+				console.log('Error occurred: ' + error);
+				return;
+		  
+		  	} else if (body) {
+		  		// Print the HTML for the page. 
+			  	var omdbObject = JSON.parse(body); 
+			  	// console.log(omdbObject)
+			  	console.log("-------------------------");
+			  	console.log("Great Movie Choice! Here are more details.\n")
+			  	//LOG DETAILS:
+					// Title of the movie.
+					console.log("Movie Title: " + omdbObject.Title);
+					// Year the movie came out.
+					console.log("Year Released: " + omdbObject.Year);
+					// IMDB Rating of the movie.
+					console.log("IMDB Rating: " + omdbObject.imdbRating);
+					// Country where the movie was produced.
+					console.log("Country Produced: " + omdbObject.Country);
+					// Language of the movie.
+					console.log("Language: " + omdbObject.Language);
+					// Plot of the movie.
+					console.log("Plot: " + omdbObject.Plot);
+					// Actors in the movie.
+					console.log("Cast: " + omdbObject.Actors);
+					// Rotten Tomatoes Rating.
+					console.log("Rotten Tomatoes Rating: " + omdbObject.Ratings[1].Value);
+					// Rotten Tomatoes URL.
+					console.log("Website: " + omdbObject.Website);
+
+					console.log("-------------------------");
+			}
+		});
+	}
 
 }
 
